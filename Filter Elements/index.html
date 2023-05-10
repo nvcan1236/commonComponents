@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Filter Elements</title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <ul class="menu">
+          <li class="item active">All food</li>
+          <li class="item">Salad</li>
+          <li class="item">Meat</li>
+          <li class="item">Drink</li>
+          <li class="item">Dessert</li>
+        </ul>
+        <div class="food-list">
+          <div class="food-item" food-type="meat">
+            <img src="./meat1.jpg" alt="" />
+          </div>
+          <div class="food-item" food-type="meat">
+            <img src="./meat2.jpg" alt="" />
+          </div>
+          <div class="food-item" food-type="drink">
+            <img src="./drinks1.jpg" alt="" />
+          </div>
+          <div class="food-item" food-type="drink">
+            <img src="./drinks2.jpg" alt="" />
+          </div>
+          <div class="food-item" food-type="drink">
+            <img src="./drinks3.jpg" alt="" />
+          </div>
+          <div class="food-item" food-type="salad">
+            <img src="./salad1.jpg" alt="" />
+          </div>
+          <div class="food-item" food-type="salad">
+            <img src="./salad2.jpg" alt="" />
+          </div>
+          <div class="food-item" food-type="dessert">
+            <img src="./dessert1.jpg" alt="" />
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      const tabList = document.querySelectorAll("li.item");
+      const foodList = document.querySelectorAll(".food-item");
+
+      // console.dir(foodList.children[0].remove());
+
+      // remove active function
+      const removeActive = () => {
+        tabList.forEach((tab) => {
+          if (tab.classList.contains("active")) tab.classList.remove("active");
+        });
+      };
+
+      const filterFood = (keyword) => {
+        keyword = keyword.toLowerCase().trim();
+        if (keyword === "all food") {
+          foodList.forEach((foodItem) => {
+            foodItem.classList.remove("hide");
+          });
+        } else {
+          foodList.forEach((foodItem) => {
+            const foodType = foodItem.getAttribute("food-type");
+            if (foodType !== keyword) {
+              foodItem.classList.add("hide");
+            } else {
+              foodItem.classList.remove("hide");
+            }
+          });
+        }
+      };
+
+      // add event for all tab
+      tabList.forEach((tab) => {
+        tab.addEventListener("click", (e) => {
+          removeActive();
+          e.target.classList.add("active");
+          filterFood(e.target.innerText);
+        });
+      });
+    </script>
+  </body>
+</html>

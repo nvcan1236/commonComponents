@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+@import url("https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Poppins", sans-serif;
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+main {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("https://images.unsplash.com/photo-1457269449834-928af64c684d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80") no-repeat center/cover;
+  position: relative;
+}
+
+main::after {
+  position: absolute;
+  content: "";
+  display: block;
+  inset: 0;
+  -webkit-backdrop-filter: blur(15px);
+          backdrop-filter: blur(15px);
+}
+
+.container {
+  background: url("https://images.unsplash.com/photo-1457269449834-928af64c684d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80") no-repeat center/cover;
+  width: 400px;
+  padding: 60px 40px;
+  position: relative;
+  z-index: 1;
+  border-radius: 8px;
+}
+.container .search input {
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.6rem;
+  border-radius: 8px;
+}
+.container .infor {
+  color: #fff;
+}
+.container .infor__location {
+  text-align: center;
+  margin-top: 32px;
+}
+.container .infor__location .city, .container .infor__location .country {
+  font-weight: 700;
+  font-size: 4rem;
+  text-shadow: 3px 2px 0 rgba(0, 0, 0, 0.6);
+}
+.container .infor__weather .temperature {
+  font-weight: 700;
+  font-size: 5rem;
+  width: 250px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 40px;
+  padding: 30px 40px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  text-shadow: 3px 2px 0 rgba(0, 0, 0, 0.6);
+}
+.container .infor__weather .feeling {
+  font-weight: 700;
+  font-size: 4rem;
+  text-align: center;
+  margin-top: 32px;
+  text-shadow: 3px 2px 0 rgba(0, 0, 0, 0.6);
+}
+.container .infor__weather .more-detail {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+.container .infor__weather .more-detail div {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  flex: 1;
+}
+.container .infor__weather .more-detail div i {
+  font-size: 2rem;
+}/*# sourceMappingURL=style.css.map */

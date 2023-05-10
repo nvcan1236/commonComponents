@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Customer Video Player</title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <video
+          id="video"
+          ontimeupdate="setTimeVideo()"
+          onclick="playVideo()"
+          src="https://storage.googleapis.com/web-dev-assets/video-and-source-tags/chrome.mp4"
+        ></video>
+        <div class="control show">
+          <div class="playbtn" onclick="playVideo()" id="playbtn">
+            <i class="fa-solid fa-play"></i>
+          </div>
+          <div class="timer">
+            <span class="current">0:00</span>/<span class="duration">0:29</span>
+            <div class="progress">
+              <div class="progress-filled"></div>
+            </div>
+            <div class="skip">
+              <span onclick="skipPrev()" class="skip-prev" class="prev"
+                ><< 10s</span
+              >
+
+              <span onclick="skipNext()" class="skip-next" class="next"
+                >10s >></span
+              >
+            </div>
+          </div>
+          <div class="volume">
+            <div class="icon"><i class="fa-solid fa-volume-high"></i></div>
+            <input type="range" value="100" min="1" max="100" oninput="setVolume()" />
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      const video = document.getElementById("video");
+      const next = document.getElementById("next");
+      const prev = document.getElementById("prev");
+      const playBtn = document.getElementById("playbtn");
+      const current = document.querySelector(".current");
+      const duration = document.querySelector(".duration");
+      const volumeInput = document.querySelector('input[type="range"]');
+
+      function getTimeString(second) {
+        const m = Math.round(second / 60);
+        const s = Math.round(second % 60);
+
+        return (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+      }
+
+      function setTimeVideo() {
+        current.innerText = getTimeString(video.currentTime);
+        duration.innerText = getTimeString(video.duration);
+        document.querySelector(".progress-filled").style.width =
+          (video.currentTime / video.duration) * 100 + "%";
+      }
+
+      function skipPrev() {
+        if (video.currentTime > 10) video.currentTime -= 10;
+        else video.currentTime = 0;
+      }
+
+      function skipNext() {
+        if (video.currentTime + 10 < video.duration) video.currentTime += 10;
+        else video.currentTime = video.duration;
+      }
+
+      function playVideo() {
+        if (video.paused) {
+          playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+          video.play();
+        } else {
+          playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+          video.pause();
+        }
+      }
+
+      function setVolume() {
+        video.volume = parseInt(volumeInput.value) / 100;
+        if ((video.volume <= 0.01))
+          document.querySelector(".volume .icon").innerHTML =
+            '<i class="fa-solid fa-volume-xmark"></i>';
+        else
+          document.querySelector(".volume .icon").innerHTML =
+            '<i class="fa-solid fa-volume-high"></i>';
+      }
+    </script>
+  </body>
+</html>

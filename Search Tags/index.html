@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Search Tags</title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <h3 class="title">Search tags</h3>
+        <div class="input-field">
+          <!-- contenteditable="true" -->
+          <ul class="tags">
+            <!-- <li class="tag">nodejs <i class="fi fi-rr-cross"></i></li>
+            <li class="tag">reactjs <i class="fi fi-rr-cross"></i></li>
+            <li class="tag">mongodb <i class="fi fi-rr-cross"></i></li>
+            <li class="tag">html&css <i class="fi fi-rr-cross"></i></li>
+            <li class="tag">javascript <i class="fi fi-rr-cross"></i></li> -->
+          </ul>
+          <input type="text" placeholder="Type and enter" />
+        </div>
+        <button class="clear">Remove All</button>
+      </div>
+    </main>
+    <script>
+      const input = document.querySelector('input[type="text"]');
+      const tagList = document.querySelector("ul");
+      const data = ["reactjs", "nodejs"];
+
+      const render = () => {
+        tagList.innerHTML = ''
+        
+        data.forEach((value) => {
+          const tag = createTag(value);
+          tagList.appendChild(tag);
+        });
+
+        const tags = document.querySelectorAll(".tag");
+        tags.forEach((tag, index) => {
+          const removeBtn = tag.querySelector("i");
+          removeBtn.addEventListener("click", () => removeTag(index));
+        });
+      };
+
+      const removeTag = (index) => {
+        data.splice(index, 1)
+        render()
+      };
+
+      const clearTag = () => {
+        data.splice(0, data.length);
+        render()
+      };
+      
+      const addTag = (value) => {
+        data.push(value);
+        render()
+        input.value = ''
+        input.focus()
+      };
+
+      const createTag = (value) => {
+        const newTag = document.createElement("li");
+        newTag.classList.add("tag");
+        newTag.innerHTML = `${value} <i class="fi fi-rr-cross">`;
+
+        return newTag;
+      };
+
+
+      const clearBtn = document.querySelector(".clear");
+      clearBtn.addEventListener("click", clearTag);
+
+      input.addEventListener("change", (e) => {
+        const value = e.target.value.trim();
+        value && addTag(value);
+      });
+
+      render()
+    </script>
+  </body>
+</html>

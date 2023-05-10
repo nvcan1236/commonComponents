@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>Slideshow</title>
+  </head>
+  <body>
+    <main>
+      <div class="container">
+        <div class="main-img">
+          <div class="prev-btn" onclick="prevImage()">
+            <i class="fi fi-rs-angle-left"></i>
+          </div>
+          <img src="" alt="" />
+          <div class="next-btn" onclick="nextImage()">
+            <i class="fi fi-rs-angle-right"></i>
+          </div>
+        </div>
+        <div class="img-list">
+          <div class="img-item current">
+            <img src="../assets/images/img1.jpeg" alt="" />
+          </div>
+          <div class="img-item">
+            <img src="../assets/images/img2.jpeg" alt="" />
+          </div>
+          <div class="img-item">
+            <img src="../assets/images/img3.jpeg" alt="" />
+          </div>
+          <div class="img-item">
+            <img src="../assets/images/img4.jpeg" alt="" />
+          </div>
+          <div class="img-item">
+            <img src="../assets/images/img5.jpeg" alt="" />
+          </div>
+          <div class="img-item">
+            <img src="../assets/images/img6.jpeg" alt="" />
+          </div>
+          <div class="img-item">
+            <img src="../assets/images/img7.jpeg" alt="" />
+          </div>
+          <div class="img-item">
+            <img src="../assets/images/img8.jpeg" alt="" />
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      let current = 0;
+      const mainImage = document.querySelector(".main-img img");
+      const imageItems = document.querySelectorAll(".img-item img");
+
+      imageItems.forEach((img, index)=> {
+            img.addEventListener('click', ()=>{
+                jumpImage(index)
+            })
+        })
+
+      document.body.onload = () => {
+        current = 0;
+        setImage();
+      };
+
+      const nextImage = () => {
+        if (current < imageItems.length-1) {
+          current++;
+        } else {
+          current = 0;
+        }
+        setImage();
+      };
+
+      const prevImage = () => {
+        if (current > 0) {
+          current--;
+        } else {
+          current = imageItems.length-1;
+        }
+        setImage();
+      };
+
+      const jumpImage = (i) => {
+        current = i;
+        setImage();
+      };
+
+      const setImage = () => {
+        imageItems.forEach((img)=> {
+            img.parentElement.classList.remove('current')
+        })
+        imageItems[current].parentElement.classList.add('current')
+        mainImage.src = imageItems[current].src;
+      };
+    </script>
+  </body>
+</html>
